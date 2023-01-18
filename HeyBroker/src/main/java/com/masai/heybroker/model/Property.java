@@ -1,9 +1,6 @@
 package com.masai.heybroker.model;
 
 
-public class Property {
-
-import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
