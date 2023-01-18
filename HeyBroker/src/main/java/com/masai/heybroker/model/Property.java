@@ -1,5 +1,8 @@
 package com.masai.heybroker.model;
 
+
+public class Property {
+
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -122,4 +125,5 @@ public class Property {
                 ", status=" + status +
                 '}';
     }
+
 }
