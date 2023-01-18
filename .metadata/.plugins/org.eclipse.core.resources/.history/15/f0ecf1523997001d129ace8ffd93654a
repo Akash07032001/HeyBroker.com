@@ -1,0 +1,12 @@
+package com.masai.heybroker.model;
+
+import java.time.LocalDate;
+
+public class Deal {
+	
+	private Integer dealId;
+	private LocalDate date;
+	private Double dealCost;
+	
+
+}
