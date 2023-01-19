@@ -1,43 +1,29 @@
 package com.masai.heybroker.model;
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
-public class Broker {
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity
+public class Broker{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer brokerId;
-    private Integer brokerName;
-    private List<Property> properties;
+    private String brokerName;
+    private String brokerEmail;
+    private String password;
+    private String mobile;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "broker")
+    private List<Property> properties = new ArrayList<>();
 
-    public Broker() {
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dealBroker")
+    private List<Deal> deals = new ArrayList<>();
 
-    public Broker(Integer brokerId, Integer brokerName, List<Property> properties) {
-        this.brokerId = brokerId;
-        this.brokerName = brokerName;
-        this.properties = properties;
-    }
 
-    public Integer getBrokerId() {
-        return brokerId;
-    }
-
-    public void setBrokerId(Integer brokerId) {
-        this.brokerId = brokerId;
-    }
-
-    public Integer getBrokerName() {
-        return brokerName;
-    }
-
-    public void setBrokerName(Integer brokerName) {
-        this.brokerName = brokerName;
-    }
-
-    public List<Property> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(List<Property> properties) {
-        this.properties = properties;
-    }
 }
