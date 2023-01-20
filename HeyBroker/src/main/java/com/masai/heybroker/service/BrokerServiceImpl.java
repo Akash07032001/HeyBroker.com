@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrokerServiceImpl implements BrokerService {
 
-	 @Autowired
+	 	@Autowired
 	    private BrokerDao brokerDao;
 	    @Autowired
 	    private BrokerSessionDao brokerSessionDao;
@@ -26,7 +26,7 @@ public class BrokerServiceImpl implements BrokerService {
 	@Override
 	public Broker registerBroker(Broker broker) throws BrokerException {
 		// TODO Auto-generated method stub
-		 Broker existingBroker = brokerDao.findByEmail(broker.getBrokerEmail());
+		 Broker existingBroker = brokerDao.findByBrokerEmail(broker.getBrokerEmail());
 
 
 

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BrokerDao extends JpaRepository<Broker,Integer> {
 	
-    public Broker findByEmail(String email);
+    public Broker findByBrokerEmail(String email);
 }

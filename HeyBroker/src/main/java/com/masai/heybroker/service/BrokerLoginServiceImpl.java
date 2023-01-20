@@ -22,7 +22,7 @@ public class BrokerLoginServiceImpl implements BrokerLoginService {
 
     @Override
     public String logIntoAccount(BrokerLoginDTO brokerLoginDTO) throws LoginException {
-       Broker existingBroker = brokerDao.findByEmail(brokerLoginDTO.getEmail());
+       Broker existingBroker = brokerDao.findByBrokerEmail(brokerLoginDTO.getEmail());
 
         if(existingBroker==null) throw new LoginException("Please enter valid email");
 
