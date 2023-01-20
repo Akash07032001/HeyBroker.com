@@ -19,7 +19,6 @@ public class Property {
 //    @ElementCollection(fetch = FetchType.EAGER)
     @Embedded
     private PropertyCriteria propertyCriteria;
-    private String offerType;
     private double offerCost;
     private double areaSqft;
     private String address;

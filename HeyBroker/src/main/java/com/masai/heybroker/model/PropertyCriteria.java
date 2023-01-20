@@ -2,6 +2,9 @@ package com.masai.heybroker.model;
 
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -9,8 +12,11 @@ import lombok.*;
 @Setter
 @ToString
 public class PropertyCriteria {
-    private String config;
-    private String offer;
+    @Enumerated(EnumType.STRING)
+    private OfferType offerType;
+
+    @Enumerated(EnumType.STRING)
+    private PropertyType propertyType;
     private String city;
     private double minCost;
     private double maxCost;
