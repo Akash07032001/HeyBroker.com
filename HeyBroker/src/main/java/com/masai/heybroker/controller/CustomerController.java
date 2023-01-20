@@ -28,4 +28,11 @@ public class CustomerController {
 
           return new ResponseEntity<Customer>(customer1,HttpStatus.OK);
     }
+
+    @GetMapping("/profile/{key}")
+    public ResponseEntity<Customer> getProfileHandler(@PathVariable String key){
+
+        Customer customer=customerService.getProfile(key);
+        return new ResponseEntity<>(customer,HttpStatus.OK);
+    }
 }

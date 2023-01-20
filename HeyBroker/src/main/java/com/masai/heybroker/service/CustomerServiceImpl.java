@@ -11,6 +11,8 @@ import com.masai.heybroker.repository.CustomerSessionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
@@ -43,5 +45,17 @@ public class CustomerServiceImpl implements CustomerService{
 
             return customerDao.save(customer);
         }else throw new CustomerException("Invalid customer details please log in first");
+    }
+
+    @Override
+    public Customer getProfile(String key) throws CustomerException {
+
+        CustomerCurrentSession customerCurrentSession =customerSessionDao.findByCid(key);
+
+        if(customerCurrentSession==null) throw new CustomerException("please login first");
+
+        Optional<Customer> opt= customerDao.findById(customerCurrentSession.getCustomerId());
+
+        return opt.get();
     }
 }

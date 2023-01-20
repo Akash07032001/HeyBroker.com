@@ -1,4 +1,4 @@
-package com.masai.heybroker.model;
+	package com.masai.heybroker.model;
 
 import lombok.*;
 
