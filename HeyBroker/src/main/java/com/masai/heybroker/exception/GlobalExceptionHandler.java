@@ -21,6 +21,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AdminException.class)
+    public ResponseEntity<MyErrorDetails>adminExceptionHandler(AdminException ae, WebRequest req){
+
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(),ae.getMessage(),req.getDescription(false));
+        return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(BrokerException.class)
     public ResponseEntity<MyErrorDetails>brokerExceptionHandler(BrokerException be, WebRequest req){
 
