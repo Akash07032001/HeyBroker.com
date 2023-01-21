@@ -20,6 +20,7 @@ public class AdminCurrentSesssion {
     @Column(unique = true)
     private Integer adminId;
 
+
     private String aid;
 
     private LocalDateTime time;

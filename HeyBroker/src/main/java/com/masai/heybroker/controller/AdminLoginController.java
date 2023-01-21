@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/adminlogin")
 public class AdminLoginController {
@@ -14,7 +16,7 @@ public class AdminLoginController {
     private AdminLoginService adminLoginService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> adminLoginHandler(@RequestBody AdminLoginDTO adminLoginDTO){
+    public ResponseEntity<String> adminLoginHandler(@Valid @RequestBody AdminLoginDTO adminLoginDTO){
 
        String key= adminLoginService.logIntoAccount(adminLoginDTO);
         return new ResponseEntity<String>(key, HttpStatus.ACCEPTED);

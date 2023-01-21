@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/brokerlogin")
 public class BrokerLoginController {
@@ -17,7 +19,7 @@ public class BrokerLoginController {
     private BrokerLoginService brokerLoginService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> brokerLoginHandler(@RequestBody BrokerLoginDTO brokerLoginDTO){
+    public ResponseEntity<String> brokerLoginHandler(@Valid @RequestBody BrokerLoginDTO brokerLoginDTO){
 
        String key= brokerLoginService.logIntoAccount(brokerLoginDTO);
         return new ResponseEntity<String>(key, HttpStatus.ACCEPTED);

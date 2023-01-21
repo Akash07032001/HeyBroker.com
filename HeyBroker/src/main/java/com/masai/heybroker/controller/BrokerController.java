@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,14 +22,14 @@ public class BrokerController {
 	 @Autowired
 	    private BrokerService brokerService;
 	    @PostMapping("/register")
-	    public ResponseEntity<Broker> registerBrokerHandler(@RequestBody Broker broker){
+	    public ResponseEntity<Broker> registerBrokerHandler(@Valid @RequestBody Broker broker){
 
 	     Broker broker1 =  brokerService.registerBroker(broker);
 
 	       return new ResponseEntity<Broker>(broker1, HttpStatus.CREATED);
 	    }
 	    @PutMapping("/update/{key}")
-	    public ResponseEntity<Broker>updateBrokerHandler(@RequestBody Broker broker, @PathVariable String key){
+	    public ResponseEntity<Broker>updateBrokerHandler(@Valid @RequestBody Broker broker, @PathVariable String key){
 
 	        Broker broker1 =  brokerService.updateBroker(broker,key);
 
@@ -36,7 +37,7 @@ public class BrokerController {
 	    }
 
 	@PostMapping("/addproperty/{key}")
-	public ResponseEntity<Property> addPropertyHandler(@RequestBody Property property, @PathVariable String key){
+	public ResponseEntity<Property> addPropertyHandler(@Valid @RequestBody Property property, @PathVariable String key){
 
 		Property  property1=brokerService.registerProperty(property,key);
 
@@ -44,7 +45,7 @@ public class BrokerController {
 	}
 
 	@PutMapping("/editproperty/{key}")
-	public ResponseEntity<Property> editPropertyHandler(@RequestBody Property property, @PathVariable String key){
+	public ResponseEntity<Property> editPropertyHandler(@Valid @RequestBody Property property, @PathVariable String key){
 
 		Property  property1=brokerService.editProperty(property,key);
 

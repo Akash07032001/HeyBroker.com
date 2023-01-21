@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,14 +20,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
     @PostMapping("/register")
-    public ResponseEntity<Customer> registerCustomerHandler(@RequestBody Customer customer){
+    public ResponseEntity<Customer> registerCustomerHandler(@Valid @RequestBody Customer customer){
 
        Customer customer1 =  customerService.createCustomer(customer);
 
        return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
     }
     @PutMapping("/update/{key}")
-    public ResponseEntity<Customer>updateCustomerHandler(@RequestBody Customer customer, @PathVariable String key){
+    public ResponseEntity<Customer>updateCustomerHandler(@Valid @RequestBody Customer customer, @PathVariable String key){
 
         Customer customer1 =  customerService.updateCustomer(customer,key);
 
