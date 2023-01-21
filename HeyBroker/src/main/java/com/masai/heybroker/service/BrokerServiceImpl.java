@@ -5,14 +5,12 @@ import com.masai.heybroker.exception.CustomerException;
 import com.masai.heybroker.exception.LoginException;
 import com.masai.heybroker.exception.PropertyException;
 import com.masai.heybroker.model.*;
-import com.masai.heybroker.repository.BrokerDao;
-import com.masai.heybroker.repository.BrokerSessionDao;
-import com.masai.heybroker.repository.CustomerDao;
-import com.masai.heybroker.repository.CustomerSessionDao;
+import com.masai.heybroker.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +20,8 @@ public class BrokerServiceImpl implements BrokerService {
 	    private BrokerDao brokerDao;
 	    @Autowired
 	    private BrokerSessionDao brokerSessionDao;
-
+		@Autowired
+		private PropertyDao propertyDao;
 	
 	@Override
 	public Broker registerBroker(Broker broker) throws BrokerException {
@@ -67,6 +66,68 @@ public class BrokerServiceImpl implements BrokerService {
 		brokerDao.save(broker);
 
 		return property;
+	}
+
+	@Override
+	public Property editProperty(Property property, String key) throws PropertyException, LoginException {
+
+		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
+
+		if(logeedInUser==null) throw new LoginException("Please Login first");
+
+		Optional<Property> opt= propertyDao.findById(property.getPropId());
+
+		if(!opt.isPresent()) throw new PropertyException("property does not exist with proerty id "+property.getPropId());
+
+
+		Optional<Broker> opt1= brokerDao.findById(logeedInUser.getBrokerId());
+
+		Broker broker=opt1.get();
+
+		broker.getProperties().add(property);
+
+		property.setBroker(broker);
+
+		brokerDao.save(broker);
+
+		return property;
+	}
+
+	@Override
+	public Property removeProperty(Integer id, String key) throws PropertyException, LoginException {
+
+		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
+
+		if(logeedInUser==null) throw new LoginException("Please Login first");
+
+		Optional<Property> opt= propertyDao.findById(id);
+
+		if(!opt.isPresent()) throw new PropertyException("property does not exist wiht property id "+id);
+
+		Property property=opt.get();
+		propertyDao.delete(property);
+
+		return property;
+	}
+
+	@Override
+	public List<Property> viewAllProperty(Integer id, String key) throws PropertyException, LoginException, BrokerException {
+
+		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
+
+		if(logeedInUser==null) throw new LoginException("Please Login first");
+
+		Optional<Broker> opt= brokerDao.findById(id);
+
+		if (!opt.isPresent()) throw new BrokerException("broker does not exist with broker id "+id);
+
+		Broker broker=opt.get();
+
+		List<Property> properties =broker.getProperties();
+
+		if(properties.isEmpty()) throw new PropertyException("broker does not have any property");
+
+		return properties;
 	}
 
 }

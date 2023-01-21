@@ -9,12 +9,9 @@ import com.masai.heybroker.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/broker")
@@ -43,6 +40,30 @@ public class BrokerController {
 		Property  property1=brokerService.registerProperty(property,key);
 
 		return new ResponseEntity<Property>(property1,HttpStatus.CREATED);
+	}
+
+	@PutMapping("/editproperty/{key}")
+	public ResponseEntity<Property> editPropertyHandler(@RequestBody Property property, @PathVariable String key){
+
+		Property  property1=brokerService.editProperty(property,key);
+
+		return new ResponseEntity<Property>(property1,HttpStatus.ACCEPTED);
+	}
+
+	@DeleteMapping("/deleteproperty/{id}/{key}")
+	public ResponseEntity<Property> deletePropertyHandler(@PathVariable Integer id, @PathVariable String key){
+
+		Property property1=brokerService.removeProperty(id,key);
+
+		return new ResponseEntity<Property>(property1,HttpStatus.OK);
+	}
+
+	@GetMapping("/viewallproperty/{id}/{key}")
+	public ResponseEntity<List<Property>> viewAllPropertyHandler(@PathVariable Integer id, @PathVariable String key){
+
+		List<Property> property1=brokerService.viewAllProperty(id,key);
+
+		return new ResponseEntity<>(property1,HttpStatus.OK);
 	}
 	
 }
