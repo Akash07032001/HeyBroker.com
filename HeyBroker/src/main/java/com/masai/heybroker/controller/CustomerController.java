@@ -2,12 +2,15 @@ package com.masai.heybroker.controller;
 
 import com.masai.heybroker.model.Admin;
 import com.masai.heybroker.model.Customer;
+import com.masai.heybroker.model.Property;
 import com.masai.heybroker.service.AdminService;
 import com.masai.heybroker.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -28,4 +31,21 @@ public class CustomerController {
 
           return new ResponseEntity<Customer>(customer1,HttpStatus.OK);
     }
+
+    @GetMapping("/profile/{key}")
+    public ResponseEntity<Customer> getProfileHandler(@PathVariable String key){
+
+        Customer customer=customerService.getProfile(key);
+        return new ResponseEntity<>(customer,HttpStatus.OK);
+    }
+
+    @GetMapping("/propertybytype/{key}/{propertytype}")
+    public ResponseEntity<List<Property>> getProfileHandler(@PathVariable String key, @PathVariable String propertytype){
+
+        List<Property> properties=customerService.viewPropertyByPropertyType(key,propertytype);
+
+        return new ResponseEntity<>(properties,HttpStatus.OK);
+    }
+
+
 }

@@ -28,6 +28,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(PropertyException.class)
+    public ResponseEntity<MyErrorDetails>propertyNotFountExceptionHandler(PropertyException me, WebRequest req){
+
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(),me.getMessage(),req.getDescription(false));
+        return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(BrokerException.class)
     public ResponseEntity<MyErrorDetails>brokerExceptionHandler(BrokerException be, WebRequest req){
 

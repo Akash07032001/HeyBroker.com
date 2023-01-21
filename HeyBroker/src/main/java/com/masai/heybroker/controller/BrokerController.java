@@ -2,6 +2,7 @@ package com.masai.heybroker.controller;
 
 import com.masai.heybroker.model.Broker;
 import com.masai.heybroker.model.Customer;
+import com.masai.heybroker.model.Property;
 import com.masai.heybroker.service.BrokerService;
 import com.masai.heybroker.service.CustomerService;
 
@@ -35,5 +36,13 @@ public class BrokerController {
 
 	          return new ResponseEntity<Broker>(broker1,HttpStatus.OK);
 	    }
+
+	@PostMapping("/addproperty/{key}")
+	public ResponseEntity<Property> addPropertyHandler(@RequestBody Property property, @PathVariable String key){
+
+		Property  property1=brokerService.registerProperty(property,key);
+
+		return new ResponseEntity<Property>(property1,HttpStatus.CREATED);
+	}
 	
 }

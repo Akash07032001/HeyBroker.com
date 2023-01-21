@@ -2,10 +2,9 @@ package com.masai.heybroker.service;
 
 import com.masai.heybroker.exception.BrokerException;
 import com.masai.heybroker.exception.CustomerException;
-import com.masai.heybroker.model.Broker;
-import com.masai.heybroker.model.BrokerCurrentSession;
-import com.masai.heybroker.model.Customer;
-import com.masai.heybroker.model.CustomerCurrentSession;
+import com.masai.heybroker.exception.LoginException;
+import com.masai.heybroker.exception.PropertyException;
+import com.masai.heybroker.model.*;
 import com.masai.heybroker.repository.BrokerDao;
 import com.masai.heybroker.repository.BrokerSessionDao;
 import com.masai.heybroker.repository.CustomerDao;
@@ -13,6 +12,8 @@ import com.masai.heybroker.repository.CustomerSessionDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BrokerServiceImpl implements BrokerService {
@@ -47,5 +48,25 @@ public class BrokerServiceImpl implements BrokerService {
             return brokerDao.save(broker);
         }else throw new BrokerException("Invalid Broker details please log in first");
     }
-   
+
+	@Override
+	public Property registerProperty(Property property, String key) throws PropertyException, LoginException {
+
+		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
+
+		if(logeedInUser==null) throw new LoginException("Please Login first");
+
+		Optional<Broker> opt= brokerDao.findById(logeedInUser.getBrokerId());
+
+		Broker broker=opt.get();
+
+		broker.getProperties().add(property);
+
+		property.setBroker(broker);
+
+		brokerDao.save(broker);
+
+		return property;
+	}
+
 }

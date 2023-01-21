@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class MyErrorDetails {
-    private LocalDateTime timestamp;
+    
+	private LocalDateTime timestamp;
     private String message;
     private String details;
 }
