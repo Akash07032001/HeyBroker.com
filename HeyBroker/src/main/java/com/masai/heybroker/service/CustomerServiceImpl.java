@@ -8,10 +8,12 @@ import com.masai.heybroker.exception.PropertyException;
 import com.masai.heybroker.model.*;
 import com.masai.heybroker.repository.CustomerDao;
 import com.masai.heybroker.repository.CustomerSessionDao;
+import com.masai.heybroker.repository.DealDao;
 import com.masai.heybroker.repository.PropertyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,9 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private PropertyDao propertyDao;
+
+    @Autowired
+    private DealDao dealDao;
 
 
 
@@ -82,16 +87,51 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public List<Property> viewAllProperty(String key) throws PropertyException, LoginException, CustomerException {
-		// TODO Auto-generated method stub
-		CustomerCurrentSession logeedInUser = customerSessionDao.findByCid(key);
+        // TODO Auto-generated method stub
+        CustomerCurrentSession logeedInUser = customerSessionDao.findByCid(key);
 
-		if(logeedInUser==null) throw new LoginException("Please Login first");
+        if (logeedInUser == null) throw new LoginException("Please Login first");
 
-		
-		List<Property> properties =propertyDao.findAll();
 
-		if(properties.isEmpty()) throw new PropertyException("No Properties available for now");
+        List<Property> properties = propertyDao.findAll();
 
-		return properties;
-	}
+        if (properties.isEmpty()) throw new PropertyException("No Properties available for now");
+
+        return properties;
+    }
+
+    @Override
+    public Deal addDeal(Integer propid, String key) throws PropertyException, LoginException {
+
+        CustomerCurrentSession logeedInUser = customerSessionDao.findByCid(key);
+
+        if (logeedInUser == null) throw new LoginException("Please Login first");
+
+
+       Optional<Property> opt = propertyDao.findById(propid);
+
+       if(!opt.isPresent()) throw  new PropertyException("No Properties available with proerty Id: " + propid);
+
+       Property property = opt.get();
+
+       Optional<Customer> opt1= customerDao.findById(logeedInUser.getCustomerId());
+
+       Customer customer= opt1.get();
+
+       Deal deal = new Deal();
+
+       deal.setDate(LocalDate.now());
+       deal.setDealCost(property.getOfferCost());
+       deal.setCustomerDeals(customer);
+       deal.setProperty(property);
+       deal.setDealBroker(property.getBroker());
+
+      customer.getDeals().add(deal);
+      property.getBroker().getDeals().add(deal);
+      property.setStatus(false);
+
+      customerDao.save(customer);
+
+      return deal;
+    }
 }
