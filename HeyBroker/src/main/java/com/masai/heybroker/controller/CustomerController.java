@@ -46,6 +46,12 @@ public class CustomerController {
 
         return new ResponseEntity<>(properties,HttpStatus.OK);
     }
+    @GetMapping("/viewallproperty/{key}")
+	public ResponseEntity<List<Property>> viewAllPropertyHandler(@PathVariable String key){
 
+		List<Property> property1=customerService.viewAllProperty(key);
+
+		return new ResponseEntity<>(property1,HttpStatus.OK);
+	}
 
 }

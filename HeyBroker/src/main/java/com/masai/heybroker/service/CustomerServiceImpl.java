@@ -1,6 +1,7 @@
 package com.masai.heybroker.service;
 
 import com.masai.heybroker.exception.AdminException;
+import com.masai.heybroker.exception.BrokerException;
 import com.masai.heybroker.exception.CustomerException;
 import com.masai.heybroker.exception.LoginException;
 import com.masai.heybroker.exception.PropertyException;
@@ -76,17 +77,21 @@ public class CustomerServiceImpl implements CustomerService{
         if(propertyList.isEmpty()) throw new PropertyException("property not found with given property type");
 
         return propertyList;
-//        PropertyType[] pt=PropertyType.values();
-//        for(PropertyType ptt:pt){
-//            if(ptt.name().equalsIgnoreCase(propertyType)){
-//                System.out.println("jdkjdkjfkdjk");
-//                List<Property> p=propertyDao.findByPropertyType(propertyType);
-//                if(p.isEmpty()) throw new PropertyException("no property found with property type "+propertyType);
-//
-//                return p;
-//            }
-//        }
 
-//        throw new PropertyException("please Enter the valid property type ");
     }
+
+	@Override
+	public List<Property> viewAllProperty(String key) throws PropertyException, LoginException, CustomerException {
+		// TODO Auto-generated method stub
+		CustomerCurrentSession logeedInUser = customerSessionDao.findByCid(key);
+
+		if(logeedInUser==null) throw new LoginException("Please Login first");
+
+		
+		List<Property> properties =propertyDao.findAll();
+
+		if(properties.isEmpty()) throw new PropertyException("No Properties available for now");
+
+		return properties;
+	}
 }
