@@ -22,7 +22,7 @@ public class Broker{
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "broker")
     private List<Property> properties = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dealBroker")
+    @OneToMany( mappedBy = "dealBroker")
     private List<Deal> deals = new ArrayList<>();
 
 

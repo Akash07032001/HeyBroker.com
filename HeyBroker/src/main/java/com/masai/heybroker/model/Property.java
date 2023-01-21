@@ -17,7 +17,6 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer propId;
-//    @ElementCollection(fetch = FetchType.EAGER)
     @Embedded
     private PropertyCriteria propertyCriteria;
     private double offerCost;
@@ -25,6 +24,7 @@ public class Property {
     private String address;
     private String street;
     private boolean status;
+
 
     @Enumerated(EnumType.STRING)
     private OfferType offerType;

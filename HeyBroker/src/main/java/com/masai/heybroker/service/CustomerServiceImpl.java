@@ -6,10 +6,7 @@ import com.masai.heybroker.exception.CustomerException;
 import com.masai.heybroker.exception.LoginException;
 import com.masai.heybroker.exception.PropertyException;
 import com.masai.heybroker.model.*;
-import com.masai.heybroker.repository.CustomerDao;
-import com.masai.heybroker.repository.CustomerSessionDao;
-import com.masai.heybroker.repository.DealDao;
-import com.masai.heybroker.repository.PropertyDao;
+import com.masai.heybroker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +28,8 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     private DealDao dealDao;
 
+    @Autowired
+    private BrokerDao brokerDao;
 
 
     @Override
@@ -114,6 +113,10 @@ public class CustomerServiceImpl implements CustomerService{
 
        Property property = opt.get();
 
+       if(property.isStatus()==false){
+           throw new PropertyException("Property already sold");
+       }
+
        Optional<Customer> opt1= customerDao.findById(logeedInUser.getCustomerId());
 
        Customer customer= opt1.get();
@@ -129,8 +132,12 @@ public class CustomerServiceImpl implements CustomerService{
       customer.getDeals().add(deal);
       property.getBroker().getDeals().add(deal);
       property.setStatus(false);
-
+        property.setCustomer(customer);
       customerDao.save(customer);
+
+//      brokerDao.save(property.getBroker());
+//
+//      propertyDao.save(property);
 
       return deal;
     }

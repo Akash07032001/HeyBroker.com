@@ -24,7 +24,8 @@ public class Deal {
 	@JoinColumn(name = "customerId")
 	private Customer customerDeals;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name = "propId")
 	private Property property;
 

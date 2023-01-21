@@ -2,6 +2,7 @@ package com.masai.heybroker.controller;
 
 import com.masai.heybroker.model.Admin;
 import com.masai.heybroker.model.Customer;
+import com.masai.heybroker.model.Deal;
 import com.masai.heybroker.model.Property;
 import com.masai.heybroker.service.AdminService;
 import com.masai.heybroker.service.CustomerService;
@@ -53,5 +54,13 @@ public class CustomerController {
 
 		return new ResponseEntity<>(property1,HttpStatus.OK);
 	}
+
+    @GetMapping("/adddeal/{pid}/{key}")
+    public ResponseEntity<Deal> addDeal( @PathVariable Integer pid ,@PathVariable String key){
+
+        Deal deal = customerService.addDeal(pid, key);
+
+        return new ResponseEntity<>(deal,HttpStatus.CREATED);
+    }
 
 }
