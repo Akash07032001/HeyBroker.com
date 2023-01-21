@@ -50,7 +50,7 @@ public class BrokerServiceImpl implements BrokerService {
     }
 
 	@Override
-	public String registerProperty(Property property, String key) throws PropertyException, LoginException {
+	public Property registerProperty(Property property, String key) throws PropertyException, LoginException {
 
 		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
 
@@ -66,7 +66,7 @@ public class BrokerServiceImpl implements BrokerService {
 
 		brokerDao.save(broker);
 
-		return "register successfull";
+		return property;
 	}
 
 }

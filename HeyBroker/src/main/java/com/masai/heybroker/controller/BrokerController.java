@@ -38,11 +38,11 @@ public class BrokerController {
 	    }
 
 	@PostMapping("/addproperty/{key}")
-	public ResponseEntity<String> addPropertyHandler(@RequestBody Property property, @PathVariable String key){
+	public ResponseEntity<Property> addPropertyHandler(@RequestBody Property property, @PathVariable String key){
 
-		String  property1=brokerService.registerProperty(property,key);
+		Property  property1=brokerService.registerProperty(property,key);
 
-		return new ResponseEntity<String>(property1,HttpStatus.CREATED);
+		return new ResponseEntity<Property>(property1,HttpStatus.CREATED);
 	}
 	
 }

@@ -12,11 +12,7 @@ import javax.persistence.Enumerated;
 @Setter
 @ToString
 public class PropertyCriteria {
-    @Enumerated(EnumType.STRING)
-    private OfferType offerType;
 
-    @Enumerated(EnumType.STRING)
-    private PropertyType propertyType;
     private String city;
     private double minCost;
     private double maxCost;

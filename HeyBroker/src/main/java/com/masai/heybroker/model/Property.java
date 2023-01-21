@@ -2,6 +2,7 @@ package com.masai.heybroker.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,14 @@ public class Property {
     private String address;
     private String street;
     private boolean status;
+
+    @Enumerated(EnumType.STRING)
+    private OfferType offerType;
+
+    @Enumerated(EnumType.STRING)
+    private PropertyType propertyType;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "brokerId")
     private Broker broker;
 

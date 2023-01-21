@@ -64,23 +64,29 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<Property> viewPropertyByPropertyType(String key, String propertyType) throws PropertyException,LoginException {
+    public List<Property> viewPropertyByPropertyType(String key, String prpType) throws PropertyException,LoginException {
 
         CustomerCurrentSession customerCurrentSession =customerSessionDao.findByCid(key);
 
         if(customerCurrentSession==null) throw new LoginException("please login first");
 
-        PropertyType[] pt=PropertyType.values();
-        for(PropertyType ptt:pt){
-            if(ptt.name().equalsIgnoreCase(propertyType)){
-                System.out.println("jdkjdkjfkdjk");
-                List<Property> p=propertyDao.findByPropertyType(propertyType);
-                if(p.isEmpty()) throw new PropertyException("no property found with property type "+propertyType);
+        PropertyType obj=PropertyType.valueOf(prpType);
 
-                return p;
-            }
-        }
+        List<Property> propertyList=propertyDao.findByPropertyType(obj);
+        if(propertyList.isEmpty()) throw new PropertyException("property not found with given property type");
 
-        throw new PropertyException("please Enter the valid property type ");
+        return propertyList;
+//        PropertyType[] pt=PropertyType.values();
+//        for(PropertyType ptt:pt){
+//            if(ptt.name().equalsIgnoreCase(propertyType)){
+//                System.out.println("jdkjdkjfkdjk");
+//                List<Property> p=propertyDao.findByPropertyType(propertyType);
+//                if(p.isEmpty()) throw new PropertyException("no property found with property type "+propertyType);
+//
+//                return p;
+//            }
+//        }
+
+//        throw new PropertyException("please Enter the valid property type ");
     }
 }

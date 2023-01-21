@@ -13,5 +13,5 @@ public interface BrokerService {
 
 	    public Broker updateBroker(Broker broker , String key) throws BrokerException;
 
-		public String registerProperty(Property property,String key) throws PropertyException, LoginException;
+		public Property registerProperty(Property property,String key) throws PropertyException, LoginException;
 }
