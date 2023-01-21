@@ -1,10 +1,6 @@
 package com.masai.heybroker.service;
 
-import com.masai.heybroker.exception.AdminException;
-import com.masai.heybroker.exception.BrokerException;
-import com.masai.heybroker.exception.CustomerException;
-import com.masai.heybroker.exception.LoginException;
-import com.masai.heybroker.exception.PropertyException;
+import com.masai.heybroker.exception.*;
 import com.masai.heybroker.model.*;
 import com.masai.heybroker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,10 +131,21 @@ public class CustomerServiceImpl implements CustomerService{
         property.setCustomer(customer);
       customerDao.save(customer);
 
-//      brokerDao.save(property.getBroker());
-//
-//      propertyDao.save(property);
-
       return deal;
+    }
+
+    @Override
+    public List<Deal> viewAllDeals(String key) throws LoginException, DealException {
+        CustomerCurrentSession logeedInUser = customerSessionDao.findByCid(key);
+
+        if (logeedInUser == null) throw new LoginException("Please Login first");
+
+           Optional<Customer> customer = customerDao.findById(logeedInUser.getCustomerId());
+
+           List<Deal> deals = customer.get().getDeals();
+
+           if (deals.isEmpty()) throw new DealException("No any deal in your portfolio");
+
+           return deals;
     }
 }

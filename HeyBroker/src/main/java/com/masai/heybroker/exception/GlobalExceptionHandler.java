@@ -35,6 +35,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DealException.class)
+    public ResponseEntity<MyErrorDetails>dealNotFoundExceptionHandler(DealException de, WebRequest req){
+
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(),de.getMessage(),req.getDescription(false));
+        return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+    }
     @ExceptionHandler(BrokerException.class)
     public ResponseEntity<MyErrorDetails>brokerExceptionHandler(BrokerException be, WebRequest req){
 

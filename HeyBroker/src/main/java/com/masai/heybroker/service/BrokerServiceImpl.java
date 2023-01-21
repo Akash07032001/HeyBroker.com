@@ -1,9 +1,6 @@
 package com.masai.heybroker.service;
 
-import com.masai.heybroker.exception.BrokerException;
-import com.masai.heybroker.exception.CustomerException;
-import com.masai.heybroker.exception.LoginException;
-import com.masai.heybroker.exception.PropertyException;
+import com.masai.heybroker.exception.*;
 import com.masai.heybroker.model.*;
 import com.masai.heybroker.repository.*;
 
@@ -128,6 +125,21 @@ public class BrokerServiceImpl implements BrokerService {
 		if(properties.isEmpty()) throw new PropertyException("broker does not have any property");
 
 		return properties;
+	}
+
+	@Override
+	public List<Deal> viewAllDeals(String key) throws LoginException, DealException {
+		BrokerCurrentSession logeedInUser = brokerSessionDao.findByBid(key);
+
+		if (logeedInUser == null) throw new LoginException("Please Login first");
+
+		Optional<Broker> broker = brokerDao.findById(logeedInUser.getBrokerId());
+
+		List<Deal> deals = broker.get().getDeals();
+
+		if (deals.isEmpty()) throw new DealException("No any deal in your portfolio");
+
+		return deals;
 	}
 
 }

@@ -63,4 +63,11 @@ public class CustomerController {
         return new ResponseEntity<>(deal,HttpStatus.CREATED);
     }
 
+    @GetMapping("/getdeals/{key}")
+    public ResponseEntity<List<Deal>> getAllDealHandler(@PathVariable String key){
+
+          List<Deal> deals = customerService.viewAllDeals(key);
+
+        return new ResponseEntity<>(deals,HttpStatus.OK);
+    }
 }
