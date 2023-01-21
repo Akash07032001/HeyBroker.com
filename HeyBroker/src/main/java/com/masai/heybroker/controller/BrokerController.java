@@ -2,6 +2,7 @@ package com.masai.heybroker.controller;
 
 import com.masai.heybroker.model.Broker;
 import com.masai.heybroker.model.Customer;
+import com.masai.heybroker.model.Deal;
 import com.masai.heybroker.model.Property;
 import com.masai.heybroker.service.BrokerService;
 import com.masai.heybroker.service.CustomerService;
@@ -64,6 +65,14 @@ public class BrokerController {
 		List<Property> property1=brokerService.viewAllProperty(id,key);
 
 		return new ResponseEntity<>(property1,HttpStatus.OK);
+	}
+
+	@GetMapping("/getdeals/{key}")
+	public ResponseEntity<List<Deal>> getAllDealHandler(@PathVariable String key){
+
+		List<Deal> deals = brokerService.viewAllDeals(key);
+
+		return new ResponseEntity<>(deals,HttpStatus.OK);
 	}
 	
 }

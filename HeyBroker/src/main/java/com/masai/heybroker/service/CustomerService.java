@@ -1,10 +1,6 @@
 package com.masai.heybroker.service;
 
-import com.masai.heybroker.exception.AdminException;
-import com.masai.heybroker.exception.BrokerException;
-import com.masai.heybroker.exception.CustomerException;
-import com.masai.heybroker.exception.LoginException;
-import com.masai.heybroker.exception.PropertyException;
+import com.masai.heybroker.exception.*;
 import com.masai.heybroker.model.Admin;
 import com.masai.heybroker.model.Customer;
 import com.masai.heybroker.model.Deal;
@@ -25,5 +21,5 @@ public interface CustomerService {
 
     public Deal addDeal(Integer propid , String key) throws PropertyException,LoginException;
 
-
+    public List<Deal> viewAllDeals(String key)throws LoginException, DealException;
 }
