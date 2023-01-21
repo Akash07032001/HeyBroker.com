@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,14 +18,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     @PostMapping("/register")
-    public ResponseEntity<Admin> registerAdminHandler(@RequestBody Admin admin){
+    public ResponseEntity<Admin> registerAdminHandler(@Valid @RequestBody Admin admin){
 
        Admin admin1 =  adminService.createAdmin(admin);
 
        return new ResponseEntity<Admin>(admin1, HttpStatus.CREATED);
     }
     @PutMapping("/update/{key}")
-    public ResponseEntity<Admin>updateAdminHandler(@RequestBody Admin admin, @PathVariable String key){
+    public ResponseEntity<Admin>updateAdminHandler(@Valid @RequestBody Admin admin, @PathVariable String key){
 
           Admin admin1 =  adminService.updateAdmin(admin,key);
 
