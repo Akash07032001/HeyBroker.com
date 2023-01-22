@@ -1,5 +1,6 @@
 package com.masai.heybroker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,9 +35,11 @@ public class Customer{
 	private String mobile;
 	//customer will have list of properties
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
+	@JsonIgnore
 	private List<Property> properties = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customerDeals")
+	@JsonIgnore
 	private List<Deal> deals = new ArrayList<>();
 
 }

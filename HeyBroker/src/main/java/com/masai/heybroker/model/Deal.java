@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,9 @@ public class Deal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer dealId;
-	@NotBlank(message = "Deal date can not be null or blank")
+	@NotNull(message = "Deal date can not be null or blank")
 	private LocalDate date;
-	@NotBlank(message = "Deal cost can not be null or blank")
+	@NotNull(message = "Deal cost can not be null or blank")
 	private Double dealCost;
 
 	@ManyToOne
