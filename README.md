@@ -31,7 +31,7 @@ This application will help Admin to search Proprty list , help broker to add new
 # Admin-Controller
 <img width="1414" alt="Screenshot 2023-01-22 at 12 21 08 PM" src="https://user-images.githubusercontent.com/105917553/213904319-3ac3c05a-1b56-4ce4-87a2-4d1f35033b8a.png">
 # AdminLogin-Controller
-<img width="1410" alt="Screenshot 2023-01-22 at 12 23 39 PM" src="https://user-images.githubusercontent.com/105917553/213904370-67f57ed1-fbdf-4d9a-89f4-6296976db061.png">
+<img width="1410" alt="Screenshot 2023-01-22 at 12 23 39 PM" src="https://user-images.githubusercontent.com/105917553/213904493-97acae20-efa1-4544-99f2-090cbe643ce9.png">
 # Customer-Controller
 <img width="1420" alt="Screenshot 2023-01-22 at 12 24 50 PM" src="https://user-images.githubusercontent.com/105917553/213904404-ee1c95c0-fea0-4850-be07-00e0e98543bf.png">
 # CustomerLogin-Controller
