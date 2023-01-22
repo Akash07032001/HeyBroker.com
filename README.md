@@ -1,6 +1,6 @@
 # astute-tank-3790
 
-Real Estate Broker Application(HeyBroker.com)
+# Real Estate Broker Application(HeyBroker.com)
 
 ![Property Real Estate logo](https://user-images.githubusercontent.com/105917553/213904059-9694f091-5101-4253-9dd5-c3c3ca430bc6.png)
 
@@ -27,3 +27,9 @@ This application will help Admin to search Proprty list , help broker to add new
 - Hibernate
 - MySQL
 - Swagger-Ui
+
+# Admin-Controller
+<img width="1414" alt="Screenshot 2023-01-22 at 12 21 08 PM" src="https://user-images.githubusercontent.com/105917553/213904319-3ac3c05a-1b56-4ce4-87a2-4d1f35033b8a.png">
+
+
+
