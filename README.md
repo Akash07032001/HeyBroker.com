@@ -4,10 +4,10 @@
 
 ![Property Real Estate logo](https://user-images.githubusercontent.com/105917553/213904059-9694f091-5101-4253-9dd5-c3c3ca430bc6.png)
 
-HeyBroker.com is an  application which is used by admin , Broker andtheir Customer for Real Estate properties. 
-This application will help Customer to buy the Property and view Proprty details.
-Customer can register themselves and login. Add Proprty to deals and purchase it .
-This application will help Admin to search Proprty list , help broker to add new property ,remove property and update property.
+HeyBroker.com is an Web server application which is used by admin , Broker and their Customer for Real Estate properties. 
+This application will help Customer to buy the Property and view Property details.
+Customer can register themselves and login. Customer can Buy Proprty.
+This application will help Admin to search Property list , help broker to add new property ,remove property and update property.
 
 # Modules 
 
